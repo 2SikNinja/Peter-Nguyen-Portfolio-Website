@@ -29,26 +29,21 @@ const Approach = () => {
       </div>
     </section>
   );
-}
+};
 
 const Card = ({
   title,
   icon,
-  children,
   description,
+  children,
 }: {
   title: string;
   icon: React.ReactNode;
-  children?: React.ReactNode;
   description: string;
+  children?: React.ReactNode;
 }) => {
-  const [hovered, setHovered] = React.useState(false);
   return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className="border border-black/[0.2] group/canvas-card flex items-center justify-center dark:border-white/[0.2]  max-w-sm w-full mx-auto p-4 relative lg:h-[35rem] rounded-3xl"
-    >
+    <div className="border border-black/[0.2] group/canvas-card flex items-center justify-center dark:border-white/[0.2]  max-w-sm w-full mx-auto p-4 relative lg:h-[35rem] rounded-3xl">
       <Icon className="absolute h-6 w-6 -top-3 -left-3 dark:text-white text-black" />
       <Icon className="absolute h-6 w-6 -bottom-3 -left-3 dark:text-white text-black" />
       <Icon className="absolute h-6 w-6 -top-3 -right-3 dark:text-white text-black" />
@@ -72,7 +67,7 @@ const Card = ({
   );
 };
 
-const AceternityIcon = ({order}: {order:string}) => {
+const AceternityIcon = ({ order }: { order: string }) => {
   return (
     <div>
       <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
@@ -85,7 +80,7 @@ const AceternityIcon = ({order}: {order:string}) => {
   );
 };
 
-export const Icon = ({ className, ...rest }: any) => {
+export const Icon = ({ className, ...rest }: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
