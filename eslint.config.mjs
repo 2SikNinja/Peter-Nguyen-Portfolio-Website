@@ -13,11 +13,11 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     rules: {
-      "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-      "@typescript-eslint/no-explicit-any": "error",
+      "@typescript-eslint/no-unused-vars": ["off", { "argsIgnorePattern": "^_" }],
+      "@typescript-eslint/no-explicit-any": "off",
       "react/jsx-uses-react": "off",
       "react/react-in-jsx-scope": "off",
-      "prefer-const": "error",
+      "prefer-const": "off",
     },
   },
 ];

@@ -2,7 +2,7 @@
 
 import { cn } from "../../lib/utils";
 import { BackgroundGradientAnimation } from "./GradientBg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoCopyOutline } from "react-icons/io5";
 import MagicButton from "./MagicButton";
 import ConfettiAnimation from "./ConfettiAnimation";
