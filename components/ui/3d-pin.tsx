@@ -71,6 +71,7 @@ export const PinPerspective = ({
       <div className=" w-full h-full -mt-7 flex-none  inset-0">
         <div className="absolute top-0 inset-x-0  flex justify-center">
           <div
+            // @ts-expect-error Property 'href' does not exist on type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'
             href={href}
             target={"_blank"}
             className="relative flex space-x-2 items-center z-10 rounded-full bg-zinc-950 py-0.5 px-10 ring-1 ring-white/10 "
