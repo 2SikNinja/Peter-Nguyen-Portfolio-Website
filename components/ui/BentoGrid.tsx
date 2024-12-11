@@ -1,6 +1,5 @@
 'use client'
 
-import { desc } from "framer-motion/client";
 import { cn } from "../../lib/utils";
 import { BackgroundGradientAnimation } from "./GradientBg";
 import { useEffect, useState } from "react";
