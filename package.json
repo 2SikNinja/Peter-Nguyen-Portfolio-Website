@@ -18,7 +18,7 @@
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
     "react-lottie": "^1.2.10",
-    "react-three": "^0.8.0",
+    "react-three": "^0.9.7",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7"
   },
