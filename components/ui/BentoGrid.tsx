@@ -3,11 +3,10 @@
 import { desc } from "framer-motion/client";
 import { cn } from "../../lib/utils";
 import { BackgroundGradientAnimation } from "./GradientBg";
-import { useState } from "react";
-import animationData from '../../data/confetti.json';
-import Lottie from "react-lottie";
+import { useEffect, useState } from "react";
 import { IoCopyOutline } from "react-icons/io5";
 import MagicButton from "./MagicButton";
+import ConfettiAnimation from "./ConfettiAnimation";
 
 export const BentoGrid = ({
   className,
@@ -136,17 +135,7 @@ export const BentoGridItem = ({
           {id === 6 && (
             <div className="mt-5 relative">
               <div className="absolute bottom-[-80px] right-0 mb-5">
-                <Lottie
-                  options={{
-                    loop: false,
-                    autoplay: copied,
-                    animationData,
-                    rendererSettings: {
-                      preserveAspectRatio: "xMidYMid slice",
-                    },
-                  }}
-                  isStopped={!copied}
-                />
+                <ConfettiAnimation play={copied} />
               </div>
               <MagicButton
                 title={copied ? "Email copied!" : "Copy my email"}
