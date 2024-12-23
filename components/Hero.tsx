@@ -42,16 +42,16 @@ const Hero = () => {
             words="Peter Nguyen"
           />
           <p className="text-center md:tracking-wider mb-4 text-sm md:text-lg lg:text-2xl">
-            Hi, I&apos;m Peter, a software engineer based in Los
-            Angeles with a background in Computer Science and a minor in Data
-            Science. I specialize in Artificial Intelligence, Machine Learning,
-            and Data Science, with experience building applications using a
-            variety of technologies, including Python, Java, and Node.js.
-            I&apos;m passionate about creating fast, responsive, and accessible
+            Hi, I&apos;m Peter, a software engineer based in Los Angeles with a
+            background in Computer Science and a minor in Data Science. I
+            specialize in Artificial Intelligence, Machine Learning, and Data
+            Science, with experience building applications using a variety of
+            technologies, including Python, Java, and Node.js. I&apos;m
+            passionate about creating fast, responsive, and accessible
             applications, and I enjoy learning new technologies and sharing my
             knowledge. Oh, and I love cats!
           </p>
-          <a href="https://drive.google.com/file/d/1T9P7iw7dtXBQ_omLvoo3E69z3-Wyc_Qq/view?usp=sharing">
+          <a href="https://drive.google.com/file/d/18SBIkm8snKoO-NUGtixOfbNf7Of0DAoP/view?usp=sharing">
             <MagicButton
               title="Show Resume"
               icon={<FaLocationArrow />}
