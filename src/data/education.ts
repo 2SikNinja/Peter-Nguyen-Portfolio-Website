@@ -8,7 +8,7 @@ export interface EducationItem {
   minor?: string;
 }
 
-export interface Course {
+export interface CourseItem {
   code: string;
   name: string;
   category: string;
@@ -26,7 +26,7 @@ export const educationData: EducationItem[] = [
   }
 ];
 
-export const courseworkData: Course[] = [
+export const courseworkData: CourseItem[] = [
   { code: "CS 061", name: "Machine Organization and Assembly Language Programming", category: "Systems" },
   { code: "CS 100", name: "Software Construction", category: "Software Engineering" },
   { code: "CS 110", name: "Principles of Web Development", category: "Web Development" },

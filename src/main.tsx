@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "./styles/main.css";
+import { PortfolioManager } from "./scripts/components/PortfolioManager";
 
-// We'll create this App component that uses your TypeScript system
 function App() {
+  useEffect(() => {
+    // Initialize the portfolio component system
+    const portfolio = new PortfolioManager();
+    portfolio.init();
+  }, []);
+
   return (
     <div id="portfolio-app">
       {/* Mouse Trail */}
@@ -13,11 +19,11 @@ function App() {
       <div className="scroll-progress" id="scrollProgress"></div>
 
       {/* Logo */}
-      <div className="logo">
-        <div className="logo-text">PN</div>
-      </div>
+      <a href="#hero" className="logo">
+        PN
+      </a>
 
-      {/* Navigation will be injected here */}
+      {/* Navigation - Populated by Navigation component */}
       <nav className="navigation">
         <ul className="nav-list" id="navigation"></ul>
       </nav>
@@ -54,29 +60,11 @@ function App() {
         }}
       ></div>
 
-      {/* Main Content */}
-      <div className="main-content" id="mainContent">
-        {/* Sections will be dynamically generated here */}
-      </div>
+      {/* Main Content - Populated by components */}
+      <div className="main-content" id="mainContent"></div>
 
-      {/* Footer */}
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-content">
-            <div className="footer-links" id="footerLinks"></div>
-            <div className="social-links" id="socialLinks"></div>
-            <div className="copyright">
-              © 2024{" "}
-              <span
-                style={{ color: "var(--primary-color)", fontWeight: "600" }}
-              >
-                Peter Nguyen
-              </span>
-              . All rights reserved.
-            </div>
-          </div>
-        </div>
-      </footer>
+      {/* Footer - Populated by Footer component */}
+      <footer className="footer" id="footer"></footer>
     </div>
   );
 }
