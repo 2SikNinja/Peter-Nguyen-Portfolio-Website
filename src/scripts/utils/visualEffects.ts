@@ -1,7 +1,122 @@
+// Enhanced floating background system
+class FloatingBackground {
+  private elements: HTMLElement[] = [];
+  private animationId: number | null = null;
+  private isDestroyed: boolean = false;
+
+  constructor() {
+    this.init();
+  }
+
+  public init(): void {
+    this.createFloatingElements();
+    this.startAnimation();
+  }
+
+  private createFloatingElements(): void {
+    // Create multiple floating elements with different sizes and positions
+    const elementsConfig = [
+      { size: 60, top: 10, left: 5, delay: 0, color: 'purple' },
+      { size: 40, top: 70, right: 10, delay: -3, color: 'blue' },
+      { size: 50, top: 40, left: 80, delay: -6, color: 'cyan' },
+      { size: 35, top: 20, right: 30, delay: -2, color: 'purple' },
+      { size: 45, top: 80, left: 20, delay: -4, color: 'blue' },
+      { size: 55, top: 60, right: 25, delay: -1, color: 'cyan' },
+      { size: 30, top: 30, left: 60, delay: -5, color: 'purple' },
+      { size: 65, top: 90, right: 5, delay: -7, color: 'blue' }
+    ];
+
+    elementsConfig.forEach((config, index) => {
+      const element = this.createElement(config, index);
+      document.body.appendChild(element);
+      this.elements.push(element);
+    });
+  }
+
+  private createElement(config: any, index: number): HTMLElement {
+    const element = document.createElement('div');
+    element.className = 'floating-background-element';
+    
+    // Position styling
+    const position = this.getPositionStyle(config);
+    
+    // Color gradient based on type
+    const gradients = {
+      purple: 'radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%)',
+      blue: 'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%)',
+      cyan: 'radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, transparent 70%)'
+    };
+
+    element.style.cssText = `
+      position: fixed;
+      width: ${config.size}px;
+      height: ${config.size}px;
+      ${position}
+      background: ${gradients[config.color as keyof typeof gradients]};
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.6;
+      filter: blur(1px);
+      animation: floatBackground ${8 + Math.random() * 4}s ease-in-out infinite;
+      animation-delay: ${config.delay}s;
+      will-change: transform;
+    `;
+
+    return element;
+  }
+
+  private getPositionStyle(config: any): string {
+    let position = '';
+    
+    if (config.top !== undefined) position += `top: ${config.top}%; `;
+    if (config.bottom !== undefined) position += `bottom: ${config.bottom}%; `;
+    if (config.left !== undefined) position += `left: ${config.left}%; `;
+    if (config.right !== undefined) position += `right: ${config.right}%; `;
+    
+    return position;
+  }
+
+  private startAnimation(): void {
+    // Additional parallax animation on scroll
+    const handleScroll = () => {
+      if (this.isDestroyed) return;
+      
+      const scrolled = window.pageYOffset;
+      
+      this.elements.forEach((element, index) => {
+        const speed = 0.1 + (index % 3) * 0.05; // Varied speeds
+        const yPos = -(scrolled * speed);
+        element.style.transform = `translateY(${yPos}px)`;
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+  }
+
+  public destroy(): void {
+    this.isDestroyed = true;
+    
+    if (this.animationId) {
+      cancelAnimationFrame(this.animationId);
+    }
+    
+    this.elements.forEach(element => {
+      if (element.parentNode) {
+        element.parentNode.removeChild(element);
+      }
+    });
+    
+    this.elements = [];
+  }
+}
+
+// Main VisualEffects class with enhanced floating background
 export class VisualEffects {
   private mouseTrail: HTMLElement | null = null;
   private scrollProgress: HTMLElement | null = null;
   private particles: HTMLElement[] = [];
+  private floatingBackground: FloatingBackground | null = null;
 
   constructor() {
     this.init();
@@ -13,6 +128,57 @@ export class VisualEffects {
     this.setupScrollProgress();
     this.setupParticleEffects();
     this.setupScrollAnimations();
+    this.initFloatingBackground();
+    this.injectFloatingCSS();
+  }
+
+  private initFloatingBackground(): void {
+    this.floatingBackground = new FloatingBackground();
+  }
+
+  private injectFloatingCSS(): void {
+    // Inject the floating background CSS if it doesn't exist
+    if (!document.getElementById('floating-background-styles')) {
+      const style = document.createElement('style');
+      style.id = 'floating-background-styles';
+      style.textContent = `
+        /* Floating background animation */
+        @keyframes floatBackground {
+          0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          25% {
+            transform: translateY(-20px) rotate(90deg);
+          }
+          50% {
+            transform: translateY(-10px) rotate(180deg);
+          }
+          75% {
+            transform: translateY(-30px) rotate(270deg);
+          }
+        }
+
+        .floating-background-element {
+          transition: opacity 0.3s ease;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+          .floating-background-element {
+            opacity: 0.3;
+            filter: blur(2px);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .floating-background-element {
+            animation: none !important;
+            transform: none !important;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+    }
   }
 
   private hideCursor(): void {
@@ -38,8 +204,6 @@ export class VisualEffects {
 
     let mouseX = 0;
     let mouseY = 0;
-    let trailX = 0;
-    let trailY = 0;
 
     // Update mouse position and immediately position trail
     document.addEventListener('mousemove', (e) => {
@@ -219,18 +383,6 @@ export class VisualEffects {
   }
 
   private setupScrollAnimations(): void {
-    // Parallax effect for floating elements
-    window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      const parallaxElements = document.querySelectorAll('.floating-element');
-      
-      parallaxElements.forEach((element, index) => {
-        const speed = 0.1 + (index * 0.05);
-        const yPos = -(scrolled * speed);
-        (element as HTMLElement).style.transform = `translateY(${yPos}px)`;
-      });
-    });
-
     // Enhanced section reveal animations
     const observerOptions = {
       threshold: 0.1,
@@ -260,43 +412,29 @@ export class VisualEffects {
     });
   }
 
-  // Advanced hover effects for cards
+  // Simple hover effects without movement - only for non-card elements
   public setupAdvancedHoverEffects(): void {
-    const cards = document.querySelectorAll('.project-card, .skills-category, .experience-card, .grid-item');
+    // Only apply subtle effects to small elements, NOT cards
+    const smallElements = document.querySelectorAll('.skill-tag, .tech-tag, .btn');
     
-    cards.forEach(card => {
-      card.addEventListener('mouseenter', (e) => {
-        const element = e.target as HTMLElement;
-        element.style.transform = 'translateY(-10px) scale(1.02)';
-        element.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+    smallElements.forEach(element => {
+      element.addEventListener('mouseenter', (e) => {
+        const target = e.target as HTMLElement;
+        // Only very subtle scale for small elements
+        if (target.classList.contains('skill-tag') || target.classList.contains('tech-tag')) {
+          target.style.transform = 'scale(1.05)';
+          target.style.transition = 'all 0.2s ease';
+        }
       });
       
-      card.addEventListener('mouseleave', (e) => {
-        const element = e.target as HTMLElement;
-        element.style.transform = 'translateY(0) scale(1)';
-      });
-      
-      // 3D tilt effect
-      card.addEventListener('mousemove', (e) => {
-        const element = e.target as HTMLElement;
-        const rect = element.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = (y - centerY) / 10;
-        const rotateY = (centerX - x) / 10;
-        
-        element.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
-      });
-      
-      card.addEventListener('mouseleave', (e) => {
-        const element = e.target as HTMLElement;
-        element.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+      element.addEventListener('mouseleave', (e) => {
+        const target = e.target as HTMLElement;
+        target.style.transform = 'scale(1)';
       });
     });
+
+    // NO CARD EFFECTS - Cards should only use CSS hover effects
+    // Removed all .project-card, .skills-category, .experience-card, .grid-item effects
   }
 
   // Cleanup method
@@ -304,7 +442,17 @@ export class VisualEffects {
     this.particles.forEach(particle => particle.remove());
     this.particles = [];
     
+    if (this.floatingBackground) {
+      this.floatingBackground.destroy();
+    }
+    
     // Restore cursor
     document.body.style.cursor = 'auto';
+
+    // Remove injected CSS
+    const styleElement = document.getElementById('floating-background-styles');
+    if (styleElement) {
+      styleElement.remove();
+    }
   }
 }

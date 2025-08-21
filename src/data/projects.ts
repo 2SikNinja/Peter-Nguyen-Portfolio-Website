@@ -80,6 +80,6 @@ export const projectsData: Project[] = [
       "/icons/tech/backend/java.svg"
     ],
     link: "https://github.com/2SikNinja/Calculator-App",
-    featured: false
+    featured: true
   }
 ];
