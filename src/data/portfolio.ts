@@ -168,19 +168,19 @@ export const socialMedia: SocialMediaItem[] = [
   {
     id: 1,
     name: "GitHub",
-    icon: "/icons/social/github.svg",
+    icon: "/src/assets/icons/git.svg",
     url: "https://github.com/2SikNinja"
   },
   {
     id: 2,
     name: "LinkedIn", 
-    icon: "/icons/social/linkedin.svg",
+    icon: "/src/assets/icons/link.svg",
     url: "https://www.linkedin.com/in/phupeternguyen/"
   },
   {
     id: 3,
     name: "Instagram",
-    icon: "/icons/social/instagram.svg", 
+    icon: "/src/assets/icons/insta.svg", 
     url: "https://www.instagram.com/ppeternnguyen"
   }
 ];

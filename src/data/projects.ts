@@ -14,12 +14,12 @@ export const projectsData: Project[] = [
     title: "Conscious Carts",
     description: "A mobile app utilizing Gemini AI to give users detailed analysis of products in markets, helping them make informed purchasing decisions with real-time data and recommendations.",
     images: [
-      "/images/projects/conscious-carts/main.jpg",
+      "/src/assets/projectImages/conciousCarts.jpg",
       "/images/projects/conscious-carts/screenshot-1.jpg",
       "/images/projects/conscious-carts/screenshot-2.jpg"
     ],
     techIcons: [
-      "/icons/tech/database/firebase.svg",
+      "/src/assets/icons/firebase-original.svg",
       "/icons/tech/mobile/dart.svg",
       "/icons/tech/backend/python.svg"
     ],

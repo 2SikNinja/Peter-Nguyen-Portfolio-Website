@@ -11,29 +11,20 @@ export interface ExperienceItem {
 export const experienceData: ExperienceItem[] = [
   {
     id: 1,
-    title: "Software Engineering Intern",
-    company: "Tech Innovation Labs",
-    period: "Summer 2023",
+    title: "Software Developer",
+    company: "Best Friends Animal Society",
+    period: "February 2025 – Present",
     location: "Los Angeles, CA",
-    description: "Developed and maintained web applications using React.js and Node.js. Collaborated with senior developers to implement new features and optimize existing code. Participated in code reviews and Agile development practices.",
-    technologies: ["React", "Node.js", "JavaScript", "Git", "MongoDB"]
+    description: "Developed responsive pet adoption platform using React and Node.js with Petfinder API integration to aggregate listings from multiple adoption centers across Los Angeles County. Implemented location-based search functionality using Google Maps API enabling users to discover available pets within customizable radius settings and view real-time shelter availability data. Designed and maintained MySQL database schema for animal profiles and adoption records while collaborating with shelter coordinators to streamline data entry workflows and improve information accuracy.",
+    technologies: ["React", "Node.js", "Petfinder API", "Google Maps API", "MySQL", "JavaScript"]
   },
   {
     id: 2,
-    title: "Research Assistant",
-    company: "Cal Poly Pomona - Computer Science Department",
-    period: "Fall 2022 - Spring 2023",
+    title: "Data Analyst Intern",
+    company: "HAPII Lab",
+    period: "September 2023 – June 2024",
     location: "Pomona, CA",
-    description: "Assisted in machine learning research projects focused on neural network optimization. Implemented data preprocessing pipelines and contributed to academic publications on AI applications.",
-    technologies: ["Python", "TensorFlow", "Data Analysis", "Machine Learning", "Research"]
-  },
-  {
-    id: 3,
-    title: "Freelance Web Developer",
-    company: "Self-Employed",
-    period: "2021 - Present",
-    location: "Remote",
-    description: "Designed and developed custom websites for small businesses and startups. Managed full project lifecycle from client consultation to deployment and maintenance.",
-    technologies: ["HTML/CSS", "JavaScript", "PHP", "WordPress", "UI/UX Design"]
+    description: "Developed full-stack survey application comparing three recommender system algorithms using JavaScript frontend and Firebase backend to collect user preference data for machine learning research. Executed cross-cultural data collection study reaching 1,000+ international participants through Amazon Mechanical Turk platform while implementing data validation and quality assurance protocols. Identified actionable insights improving algorithm accuracy by 15% by performing statistical analysis in Python using Pandas for data manipulation and Matplotlib for data visualization of geographical preference patterns.",
+    technologies: ["JavaScript", "Firebase", "Python", "Pandas", "Matplotlib", "Amazon Mechanical Turk", "Machine Learning"]
   }
 ];
