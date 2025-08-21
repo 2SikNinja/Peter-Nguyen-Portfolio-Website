@@ -33,7 +33,7 @@ export class Footer {
         </div>
         <div class="footer-bottom">
           <div class="copyright">
-            © 2024 <span style="color: var(--primary-color); font-weight: 600;">Peter Nguyen</span>. All rights reserved.
+            © 2025 <span style="color: var(--primary-color); font-weight: 600;">Peter Nguyen</span>. All rights reserved.
           </div>
         </div>
       </div>
