@@ -1,0 +1,340 @@
+/* ============================================
+   FULL-SCREEN IMAGE MODAL
+   src/styles/components/fullscreen-modal.css
+   ============================================ */
+
+/* Modal container - scoped with unique ID selectors */
+.fullscreen-image-modal[id^="fullscreenImageModal_"] {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 9999;
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	pointer-events: none;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.fullscreen-image-modal[id^="fullscreenImageModal_"].active {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: all;
+}
+
+/* Backdrop */
+.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="backdrop_"] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.98);
+	backdrop-filter: blur(20px);
+	z-index: 1;
+}
+
+/* Close button */
+.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="closeBtn_"] {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	background: rgba(0, 0, 0, 0.8);
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	color: white;
+	font-size: 2rem;
+	cursor: pointer;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s ease;
+	z-index: 100;
+	backdrop-filter: blur(10px);
+	font-weight: normal;
+	line-height: 1;
+	font-family: inherit;
+}
+
+.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="closeBtn_"]:hover {
+	background: rgba(220, 38, 38, 0.9);
+	border-color: rgba(255, 255, 255, 0.6);
+	transform: scale(1.1);
+	box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+}
+
+/* Image container */
+.fullscreen-image-modal[id^="fullscreenImageModal_"] .fullscreen-image-container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10;
+	max-width: 100vw;
+	max-height: 100vh;
+}
+
+/* Modal image */
+.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="modalImage_"] {
+	max-width: calc(100vw - 200px);
+	max-height: calc(100vh - 200px);
+	width: auto;
+	height: auto;
+	object-fit: contain;
+	border-radius: 12px;
+	box-shadow: 0 30px 100px rgba(0, 0, 0, 0.9);
+	transition: all 0.3s ease;
+	display: block;
+	opacity: 0;
+	transform: scale(0.9);
+}
+
+.fullscreen-image-modal[id^="fullscreenImageModal_"].active [id^="modalImage_"] {
+	opacity: 1;
+	transform: scale(1);
+}
+
+/* Navigation buttons */
+.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="prevBtn_"],
+.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="nextBtn_"] {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	background: rgba(0, 0, 0, 0.8);
+	color: white;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	font-size: 2rem;
+	font-weight: bold;
+	transition: all 0.3s ease;
+	backdrop-filter: blur(10px);
+	z-index: 50;
+	user-select: none;
+	line-height: 1;
+	font-family: inherit;
+}
+
+.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="prevBtn_"]:hover,
+.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="nextBtn_"]:hover {
+	background: var(--primary-color);
+	border-color: var(--primary-color);
+	transform: translateY(-50%) scale(1.1);
+	box-shadow: 0 0 30px var(--purple-glow);
+}
+
+.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="prevBtn_"] {
+	left: 30px;
+}
+
+.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="nextBtn_"] {
+	right: 30px;
+}
+
+/* Modal info */
+.fullscreen-image-modal[id^="fullscreenImageModal_"] .fullscreen-modal-info {
+	position: absolute;
+	bottom: 40px;
+	left: 50%;
+	transform: translateX(-50%);
+	text-align: center;
+	color: white;
+	background: rgba(0, 0, 0, 0.8);
+	padding: 20px 30px;
+	border-radius: 30px;
+	backdrop-filter: blur(15px);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	z-index: 50;
+	max-width: 90vw;
+	box-sizing: border-box;
+}
+
+.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="modalTitle_"] {
+	font-size: 1.5rem;
+	font-weight: 600;
+	margin: 0 0 8px 0;
+	color: var(--primary-color);
+	font-family: inherit;
+}
+
+.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="modalCounter_"] {
+	font-size: 1rem;
+	color: var(--text-secondary);
+	margin: 0;
+	font-family: inherit;
+}
+
+/* Keyboard hint */
+.fullscreen-image-modal[id^="fullscreenImageModal_"] .fullscreen-modal-hint {
+	position: absolute;
+	top: 30px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: rgba(0, 0, 0, 0.8);
+	color: var(--text-secondary);
+	padding: 10px 20px;
+	border-radius: 25px;
+	font-size: 0.8rem;
+	z-index: 50;
+	opacity: 0.7;
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	animation: fadeInUp 0.5s ease;
+	font-family: inherit;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateX(-50%) translateY(20px);
+	}
+
+	to {
+		opacity: 0.7;
+		transform: translateX(-50%) translateY(0);
+	}
+}
+
+/* Body scroll lock only when modal is active */
+body:has(.fullscreen-image-modal[id^="fullscreenImageModal_"].active) {
+	overflow: hidden;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="modalImage_"] {
+		max-width: calc(100vw - 120px);
+		max-height: calc(100vh - 250px);
+	}
+
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="closeBtn_"] {
+		top: 20px;
+		right: 20px;
+		width: 50px;
+		height: 50px;
+		font-size: 1.5rem;
+	}
+
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="prevBtn_"],
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="nextBtn_"] {
+		width: 60px;
+		height: 60px;
+		font-size: 1.6rem;
+	}
+
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="prevBtn_"] {
+		left: 20px;
+	}
+
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="nextBtn_"] {
+		right: 20px;
+	}
+
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] .fullscreen-modal-info {
+		bottom: 30px;
+		padding: 15px 20px;
+	}
+
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="modalTitle_"] {
+		font-size: 1.2rem;
+	}
+
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="modalCounter_"] {
+		font-size: 0.9rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="modalImage_"] {
+		max-width: calc(100vw - 100px);
+		max-height: calc(100vh - 220px);
+	}
+
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="closeBtn_"] {
+		top: 15px;
+		right: 15px;
+		width: 45px;
+		height: 45px;
+		font-size: 1.3rem;
+	}
+
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="prevBtn_"],
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="nextBtn_"] {
+		width: 50px;
+		height: 50px;
+		font-size: 1.4rem;
+	}
+
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="prevBtn_"] {
+		left: 15px;
+	}
+
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="nextBtn_"] {
+		right: 15px;
+	}
+
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] .fullscreen-modal-info {
+		bottom: 20px;
+		padding: 12px 16px;
+	}
+
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="modalTitle_"] {
+		font-size: 1rem;
+	}
+
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="modalCounter_"] {
+		font-size: 0.8rem;
+	}
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="backdrop_"] {
+		background: rgba(0, 0, 0, 0.99);
+	}
+
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="prevBtn_"],
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="nextBtn_"] {
+		background: white;
+		color: black;
+		border: 2px solid black;
+	}
+
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="closeBtn_"] {
+		background: rgba(255, 255, 255, 0.9);
+		color: black;
+	}
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+	.fullscreen-image-modal[id^="fullscreenImageModal_"],
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="modalImage_"],
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="prevBtn_"],
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="nextBtn_"],
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] [id^="closeBtn_"] {
+		transition: none;
+		animation: none;
+	}
+
+	.fullscreen-image-modal[id^="fullscreenImageModal_"] .fullscreen-modal-hint {
+		animation: none;
+	}
+}

@@ -16,7 +16,7 @@ export const experienceData: ExperienceItem[] = [
     period: "February 2025 – Present",
     location: "Los Angeles, CA",
     description: "Developed responsive pet adoption platform using React and Node.js with Petfinder API integration to aggregate listings from multiple adoption centers across Los Angeles County. Implemented location-based search functionality using Google Maps API enabling users to discover available pets within customizable radius settings and view real-time shelter availability data. Designed and maintained MySQL database schema for animal profiles and adoption records while collaborating with shelter coordinators to streamline data entry workflows and improve information accuracy.",
-    technologies: ["React", "Node.js", "Petfinder API", "Google Maps API", "MySQL", "JavaScript"]
+    technologies: ["React", "Node.js", "Google Maps API", "MySQL", "JavaScript"]
   },
   {
     id: 2,
